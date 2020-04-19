@@ -16,37 +16,36 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        return sessionFactory.getCurrentSession().createQuery("from User").getResultList();
     }
 
     @Override
     public void addUser(User user) {
-
+        sessionFactory.getCurrentSession().save(user);
     }
 
     @Override
     public void delete(long userId) {
-
+        sessionFactory.getCurrentSession().createQuery("delete from User where id = :id")
+                .setParameter("id", userId).executeUpdate();
     }
 
     @Override
     public User getUserById(Long id) {
-        return null;
-    }
+        User user = (User) sessionFactory.getCurrentSession().createQuery("from User where id = :id")
+                .setParameter("id", id).uniqueResult();
 
-
-    @Override
-    public boolean isAdmin(String name) {
-        return false;
+        return user;
     }
 
     @Override
-    public boolean authUser(String name, String password) {
-        return false;
-    }
-
-    @Override
-    public void update(long userId, String name, String age, String passport, String password, String role) {
-
+    public void update(long userId, String name, int age, long passport) {
+        sessionFactory.getCurrentSession().createQuery("update User set name = :nm, " +
+                "age = :a, passport = :ps where id = :id")
+                .setParameter("id", userId)
+                .setParameter("nm", name)
+                .setParameter("a", age)
+                .setParameter("ps", passport)
+                .executeUpdate();
     }
 }

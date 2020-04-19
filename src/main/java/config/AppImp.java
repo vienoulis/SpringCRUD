@@ -16,6 +16,6 @@ public class AppImp extends AbstractAnnotationConfigDispatcherServletInitializer
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/admin", "/start"};
+        return new String[]{"/user", "/update", "/delete"};
     }
 }
