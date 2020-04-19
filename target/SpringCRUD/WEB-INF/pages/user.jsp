@@ -19,8 +19,15 @@
             <td><input type="number" name="age"></td>
         </tr>
         <tr>
-            <td>Passport:</td>
-            <td><input type="number" name="passport"></td>
+            <td>Password:</td>
+            <td><input type="text" name="password"></td>
+        </tr>
+        <tr>
+            <td>Role:</td>
+            <td>
+                <input type="radio" name="role" value="admin"/> Admin
+                <input type="radio" name="role" value="user"/> User
+            </td>
         </tr>
     </table>
     <p><input type="submit" name="add" value="Create"></p>
@@ -29,7 +36,7 @@
     <tr>
         <td><h4>Name: </h4></td>
         <td><h4>Age: </h4></td>
-        <td><h4>Passport: </h4></td>
+        <td><h4>Role: </h4></td>
     </tr>
     <c:forEach items="${users}" var='user'>
         <form method="post">
@@ -37,7 +44,7 @@
             <tr>
                 <td><c:out value="${user.name}"/></td>
                 <td><c:out value="${user.age}"/></td>
-                <td><c:out value="${user.passport}"/></td>
+                <td><c:out value="${user.role.toString()}"/></td>
                 <td><input formaction="/delete" type="submit" name="delete" value="Delete"></td>
                 <td><input formaction="/update" formmethod="get" type="submit" name="update" value="Update"></td>
             </tr>

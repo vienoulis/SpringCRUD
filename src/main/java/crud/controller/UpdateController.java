@@ -26,11 +26,12 @@ public class UpdateController {
 
     @PostMapping("/update")
     public String postUpdate(HttpServletRequest request, ModelMap map) {
+        String id = request.getParameter("userId");
         String name = request.getParameter("nameToUpdate");
         String age = request.getParameter("ageToUpdate");
-        String passport = request.getParameter("passportToUpdate");
-        String id = request.getParameter("userId");
-        service.update(id, name, age, passport);
+        String passport = request.getParameter("passwordToUpdate");
+        String role = request.getParameter("role");
+        service.update(id, name, age, passport, role);
         map.addAttribute("users", service.getUsers());
 
         return "user";

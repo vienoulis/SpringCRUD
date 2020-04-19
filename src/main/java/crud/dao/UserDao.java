@@ -1,5 +1,6 @@
 package crud.dao;
 
+import crud.model.Role;
 import crud.model.User;
 
 import java.util.List;
@@ -13,5 +14,5 @@ public interface UserDao {
 
     User getUserById(Long id);
 
-    void update(long userId, String name, int age, long passport);
+    void update(long userId, String name, int age, String password, Role role);
 }
