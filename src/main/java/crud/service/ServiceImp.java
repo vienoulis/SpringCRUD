@@ -1,17 +1,14 @@
 package crud.service;
 
 import crud.dao.UserDao;
-import crud.model.Role;
 import crud.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @org.springframework.stereotype.Service
-public class ServiceImp implements Service {
+public class ServiceImp  implements Service {
 
     @Autowired
     private UserDao dao;
@@ -22,11 +19,9 @@ public class ServiceImp implements Service {
     }
 
     @Transactional
-    public void add(String name, String age, String password, String role) {
-        if (name != null && age.matches("[0-9]+") && password != null && role != null) {
-            Set<Role> roleSet = new HashSet<>();
-            roleSet.add(new Role(1L, "ROLE_USER"));
-            User user = new User(name, Integer.parseInt(age), password, roleSet);
+    public void add(String name, String age, String passport) {
+        if (name != null && age.matches("[0-9]+") && passport.matches("[0-9]+")) {
+            User user = new User(name, Integer.parseInt(age), Long.parseLong(passport));
             if (!getUsers().contains(user)) {
                 dao.addUser(user);
             }
@@ -39,12 +34,10 @@ public class ServiceImp implements Service {
     }
 
     @Transactional
-    public void update(String id, String name, String age, String password, String role) {
-        if (id.matches("[0-9]+") && name != null && password != null &&
-                age.matches("[0-9]+") && role.matches("[a-zA-z]+")) {
-            Set<Role> roleSet = new HashSet<>();
-            roleSet.add(new Role(1L, "ROLE_USER"));
-            dao.update(Long.parseLong(id), name, Integer.parseInt(age), password, roleSet);
+    public void update(String id, String name, String age, String passport) {
+        if (id.matches("[0-9]+") && name != null &&
+                age.matches("[0-9]+") && passport.matches("[0-9]+")) {
+            dao.update(Long.parseLong(id), name, Integer.parseInt(age), Long.parseLong(passport));
         }
     }
 

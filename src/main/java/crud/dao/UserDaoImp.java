@@ -1,6 +1,5 @@
 package crud.dao;
 
-import crud.model.Role;
 import crud.model.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,14 +39,13 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    public void update(long userId, String name, int age, String passport, Role role) {
+    public void update(long userId, String name, int age, long passport) {
         sessionFactory.getCurrentSession().createQuery("update User set name = :nm, " +
-                "age = :a, password = :ps, role = :rl where id = :id")
+                "age = :a, passport = :ps where id = :id")
                 .setParameter("id", userId)
                 .setParameter("nm", name)
                 .setParameter("a", age)
                 .setParameter("ps", passport)
-                .setParameter("rl", role)
                 .executeUpdate();
     }
 }

@@ -32,8 +32,7 @@ public class UserController {
     public String postUser(HttpServletRequest request, ModelMap map) {
         service.add(request.getParameter("name"),
                 request.getParameter("age"),
-                request.getParameter("password"),
-                request.getParameter("role")
+                request.getParameter("passport")
         );
         List<User> users = service.getUsers();
         map.addAttribute("users", users);

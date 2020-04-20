@@ -1,16 +1,11 @@
 package crud.model;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User implements UserDetails {
+public class User {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,33 +17,24 @@ public class User implements UserDetails {
     @Column(name = "age")
     private int age;
 
-
-    @Column(name = "password")
-    private String password;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Role> role;
-
-    public void setRole(Set<Role> role) {
-        this.role = role;
-    }
+    @Column(name = "passport")
+    private long passport;
 
     public User() {
     }
 
-    public User(String name, int age, String password, Set<Role> role) {
+    public User(String name, int age, long passport) {
         this.name = name;
         this.age = age;
-        this.password = password;
-        this.role = role;
+        this.passport = passport;
+
     }
 
-    public User(long id, String name, int age, String password, Set<Role> role) {
+    public User(long id, String name, int age, long passport) {
         this.id = id;
         this.name = name;
         this.age = age;
-        this.password = password;
-        this.role = role;
+        this.passport = passport;
     }
 
     public long getId() {
@@ -76,46 +62,12 @@ public class User implements UserDetails {
         this.age = age;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRole();
+    public long getPassport() {
+        return passport;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return name;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<Role> getRole() {
-        return role;
+    public void setPassport(long passport) {
+        this.passport = passport;
     }
 
     @Override
@@ -123,7 +75,7 @@ public class User implements UserDetails {
         return "User{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
-                ", role=" + role +
+                ", passport=" + passport +
                 '}';
     }
 
@@ -133,13 +85,12 @@ public class User implements UserDetails {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return age == user.age &&
-                Objects.equals(name, user.name) &&
-                Objects.equals(password, user.password) &&
-                role == user.role;
+                passport == user.passport &&
+                Objects.equals(name, user.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, age, password, role);
+        return Objects.hash(name, age, passport);
     }
 }
