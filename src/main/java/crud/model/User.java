@@ -1,11 +1,16 @@
 package crud.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,20 +26,24 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "role")
-    private Role role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> role;
+
+    public void setRole(Set<Role> role) {
+        this.role = role;
+    }
 
     public User() {
     }
 
-    public User(String name, int age, String password, Role role) {
+    public User(String name, int age, String password, Set<Role> role) {
         this.name = name;
         this.age = age;
         this.password = password;
         this.role = role;
     }
 
-    public User(long id, String name, int age, String password, Role role) {
+    public User(long id, String name, int age, String password, Set<Role> role) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -67,20 +76,46 @@ public class User {
         this.age = age;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRole();
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return name;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public Role getRole() {
+    public Set<Role> getRole() {
         return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
     }
 
     @Override

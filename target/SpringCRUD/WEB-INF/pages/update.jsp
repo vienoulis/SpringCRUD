@@ -19,8 +19,15 @@
             <td><input type="number" value="${userUpdated.age}" name="ageToUpdate"></td>
         </tr>
         <tr>
-            <td>Passport:</td>
-            <td><input type="number" value="${userUpdated.passport}" name="passportToUpdate"></td>
+            <td>Password:</td>
+            <td><input type="text" value="${userUpdated.password}" name="passwordToUpdate"></td>
+        </tr>
+        <tr>
+            <td>Role:</td>
+            <td>
+                <input type="radio" name="role" value="ROLE_ADMIN"/> Admin
+                <input type="radio" name="role" value="ROLE_USER"/> User
+            </td>
         </tr>
     </table>
     <p>

@@ -25,8 +25,8 @@
         <tr>
             <td>Role:</td>
             <td>
-                <input type="radio" name="role" value="admin"/> Admin
-                <input type="radio" name="role" value="user"/> User
+                <input type="radio" name="role" value="ROLE_ADMIN"/> Admin
+                <input type="radio" name="role" value="ROLE_USER"/> User
             </td>
         </tr>
     </table>

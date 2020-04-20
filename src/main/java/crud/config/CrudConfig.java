@@ -1,4 +1,4 @@
-package config;
+package crud.config;
 
 import crud.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
