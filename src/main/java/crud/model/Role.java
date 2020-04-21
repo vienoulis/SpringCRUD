@@ -16,9 +16,9 @@ public class Role  {
     private String role;
 
     @ManyToMany
-    @JoinTable(name = "users_cars",
+    @JoinTable(name = "users_roles",
             //foreign key for EmployeeEntity in employee_car table
-            joinColumns = @JoinColumn(name = "cars_id"),
+            joinColumns = @JoinColumn(name = "user_id"),
             //foreign key for other side - EmployeeEntity in employee_car table
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<User> userSet = new HashSet<>();

@@ -11,7 +11,7 @@ public class AppImp extends AbstractAnnotationConfigDispatcherServletInitializer
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class<?>[]{CrudConfig.class};
+        return new Class<?>[]{CrudConfig.class, SecurityConfig.class};
     }
 
     @Override

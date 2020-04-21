@@ -19,14 +19,11 @@ public class User {
     @Column(name = "age")
     private int age;
 
-    @Column(name = "passport")
-    private long passport;
-
     @Column(name = "password")
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "users_cars",
+    @JoinTable(name = "users_roles",
             //foreign key for EmployeeEntity in employee_car table
             joinColumns = @JoinColumn(name = "user_id"),
             //foreign key for other side - EmployeeEntity in employee_car table
@@ -36,18 +33,18 @@ public class User {
     public User() {
     }
 
-    public User(String name, int age, long passport) {
+    public User(String name, int age, String password) {
         this.name = name;
         this.age = age;
-        this.passport = passport;
+        this.password = password;
 
     }
 
-    public User(long id, String name, int age, long passport) {
+    public User(long id, String name, int age, String password) {
         this.id = id;
         this.name = name;
         this.age = age;
-        this.passport = passport;
+        this.password = password;
     }
 
     public long getId() {
@@ -66,6 +63,13 @@ public class User {
         this.name = name;
     }
 
+    public Set<Role> getRoleSet() {
+        return roleSet;
+    }
+
+    public void setRoleSet(Set<Role> roleSet) {
+        this.roleSet = roleSet;
+    }
 
     public int getAge() {
         return age;
@@ -75,12 +79,12 @@ public class User {
         this.age = age;
     }
 
-    public long getPassport() {
-        return passport;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassport(long passport) {
-        this.passport = passport;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -88,7 +92,7 @@ public class User {
         return "User{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
-                ", passport=" + passport +
+                ", password=" + password +
                 '}';
     }
 
@@ -98,12 +102,12 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return age == user.age &&
-                passport == user.passport &&
+                password.equals(user.password) &&
                 Objects.equals(name, user.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, age, passport);
+        return Objects.hash(name, age, password);
     }
 }

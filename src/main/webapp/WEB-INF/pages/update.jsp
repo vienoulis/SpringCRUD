@@ -18,10 +18,6 @@
             <td>Age:</td>
             <td><input type="number" value="${userUpdated.age}" name="ageToUpdate"></td>
         </tr>
-        <tr>
-            <td>Passport:</td>
-            <td><input type="number" value="${userUpdated.passport}" name="passportToUpdate"></td>
-        </tr>
     </table>
     <p>
         <input type="submit" name="doUpdate" value="Update">
