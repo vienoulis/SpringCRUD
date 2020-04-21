@@ -1,7 +1,9 @@
 package crud.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -19,6 +21,17 @@ public class User {
 
     @Column(name = "passport")
     private long passport;
+
+    @Column(name = "password")
+    private String password;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "users_cars",
+            //foreign key for EmployeeEntity in employee_car table
+            joinColumns = @JoinColumn(name = "user_id"),
+            //foreign key for other side - EmployeeEntity in employee_car table
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roleSet = new HashSet<>();
 
     public User() {
     }
