@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 public class UpdateController {
@@ -28,9 +30,12 @@ public class UpdateController {
     public String postUpdate(HttpServletRequest request, ModelMap map) {
         String name = request.getParameter("nameToUpdate");
         String age = request.getParameter("ageToUpdate");
-        String passport = request.getParameter("passportToUpdate");
+        String password = request.getParameter("passwordToUpdate");
         String id = request.getParameter("userId");
-        service.update(id, name, age, passport);
+        Set<String> roleSet = new HashSet<>();
+        roleSet.add(request.getParameter("role_admin_update"));
+        roleSet.add(request.getParameter("role_user_update"));
+        service.update(id, name, age, password, roleSet);
         map.addAttribute("users", service.getUsers());
 
         return "user";

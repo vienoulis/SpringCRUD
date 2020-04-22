@@ -1,6 +1,7 @@
 package config;
 
 import crud.model.User;
+import crud.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;

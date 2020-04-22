@@ -1,11 +1,13 @@
 package crud.dao;
 
+import crud.model.Role;
 import crud.model.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public class UserDaoImp implements UserDao {
@@ -38,14 +40,30 @@ public class UserDaoImp implements UserDao {
         return user;
     }
 
+
+
     @Override
-    public void update(long userId, String name, int age, long passport) {
+    public Role getRoleByName(String role) {
+        return (Role) sessionFactory.getCurrentSession().createQuery("from Role where role = :rl")
+                .setParameter("rl", role).uniqueResult();
+    }
+
+    @Override
+    public User getUserByName(String name) {
+        return (User) sessionFactory.getCurrentSession().createQuery("from User where name = :nm")
+                .setParameter("nm", name).uniqueResult();
+    }
+
+    @Override
+    public void update(long userId, String name, int age, String password, Set<Role> roleSet) {
         sessionFactory.getCurrentSession().createQuery("update User set name = :nm, " +
-                "age = :a, passport = :ps where id = :id")
+                "age = :a, password = :ps, roleSet = :rs where id = :id")
                 .setParameter("id", userId)
                 .setParameter("nm", name)
                 .setParameter("a", age)
-                .setParameter("ps", passport)
+                .setParameter("ps", password)
+                .setParameter("rs", roleSet)
                 .executeUpdate();
     }
+
 }

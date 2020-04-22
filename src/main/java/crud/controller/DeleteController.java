@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/delete")
+
 public class DeleteController {
     @Autowired
     private Service service;

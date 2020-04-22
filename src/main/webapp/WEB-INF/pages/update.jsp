@@ -18,6 +18,17 @@
             <td>Age:</td>
             <td><input type="number" value="${userUpdated.age}" name="ageToUpdate"></td>
         </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type="text" value="${userUpdated.password}" name="passwordToUpdate"></td>
+        </tr>
+        <tr>
+            <td>Role:</td>
+            <td>
+                <input type="checkbox" name="role_admin_update" value="ADMIN"/> Admin
+                <input type="checkbox" name="role_user_update" value="USER"/> User
+            </td>
+        </tr>
     </table>
     <p>
         <input type="submit" name="doUpdate" value="Update">
