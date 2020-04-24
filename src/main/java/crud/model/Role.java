@@ -18,22 +18,24 @@ public class Role implements GrantedAuthority {
     @Column(name = "role")
     private String role;
 
-    @ManyToMany(mappedBy = "roleSet", fetch = FetchType.EAGER)
+//    @ManyToMany(mappedBy = "roleSet", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "roleSet")
+//    @ManyToMany( fetch = FetchType.EAGER)
 //    @JoinTable(name = "users_roles",
 //            //foreign key for EmployeeEntity in employee_car table
-//            joinColumns = @JoinColumn(name = "user_id"),
+//            joinColumns = @JoinColumn(name =  "roleSet_id"),
 //            //foreign key for other side - EmployeeEntity in employee_car table
-//            inverseJoinColumns = @JoinColumn(name = "role_id"))
+//            inverseJoinColumns = @JoinColumn(name = "userSet_id"))
     private Set<User> userSet = new HashSet<>();
 
     public Role() {
     }
 
 
-    public Role(Long id, String role, Set<User> userSet) {
+    public Role(Long id, String role) {
         this.id = id;
         this.role = role;
-        this.userSet = userSet;
+//        this.userSet = userSet;
     }
 
     public Long getId() {
@@ -70,13 +72,14 @@ public class Role implements GrantedAuthority {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Role role1 = (Role) o;
-        return Objects.equals(role, role1.role) &&
-                Objects.equals(userSet, role1.userSet);
+        return Objects.equals(role, role1.role);
+//                Objects.equals(userSet, role1.userSet);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(role, userSet);
+//        return Objects.hash(role, userSet);
+        return Objects.hash(role);
     }
 
     @Override

@@ -6,9 +6,15 @@
 <body>
 
 <form method="post" action="/login">
-    <input name="j_username"/>
-    <input name="j_password"/>
-    <input type="submit"/>
+    <p>
+        <input name="j_username"/>
+    </p>
+    <p>
+        <input name="j_password"/>
+    </p>
+    <p>
+        <input type="submit"/>
+    </p>
 </form>
 
 </body>

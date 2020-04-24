@@ -1,48 +1,39 @@
 package crud.controller;
 
+
 import crud.model.User;
 import crud.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/")
 public class UserController {
 
     @Autowired
     private Service service;
-
-
-    @GetMapping()
-    public String getUser(ModelMap map) {
-        List<User> users = service.getUsers();
-        map.addAttribute("users", users);
-
-        return "user";
+    @GetMapping(value = "hello")
+    public String printWelcome(ModelMap model) {
+        List<String> messages = new ArrayList<>();
+        messages.add("Hello!");
+        messages.add("I'm Spring MVC-SECURITY application");
+        messages.add("5.2.0 version by sep'19 ");
+        model.addAttribute("messages", messages);
+        return "hello";
     }
 
-    @PostMapping()
-    public String postUser(HttpServletRequest request, ModelMap map) {
-        Set<String> roleSet = new HashSet<>();
-        roleSet.add(request.getParameter("role_admin"));
-        roleSet.add(request.getParameter("role_user"));
-        service.add(request.getParameter("name"),
-                request.getParameter("age"),
-                request.getParameter("password"),
-                roleSet
-        );
-        List<User> users = service.getUsers();
-        map.addAttribute("users", users);
-
-        return "user";
+    @GetMapping(value = "login")
+    public String loginPage(ModelMap map) {
+//        List<User> users = service.getUsers();
+//        map.addAttribute("users", users);
+        return "login";
     }
+
 }

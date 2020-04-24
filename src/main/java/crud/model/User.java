@@ -26,12 +26,13 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinTable(name = "users_roles",
-//            //foreign key for EmployeeEntity in employee_car table
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            //foreign key for other side - EmployeeEntity in employee_car table
-//            inverseJoinColumns = @JoinColumn(name = "role_id"))
+//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany
+    @JoinTable(name = "users_roles",
+            //foreign key for EmployeeEntity in employee_car table
+            joinColumns = @JoinColumn(name = "userSet_id"),
+            //foreign key for other side - EmployeeEntity in employee_car table
+            inverseJoinColumns = @JoinColumn(name = "roleSet_id"))
     private Set<Role> roleSet = new HashSet<>();
 
     public User() {

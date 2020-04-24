@@ -8,14 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.Column;
 import javax.persistence.Id;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@org.springframework.stereotype.Service
+@Component
 public class ServiceImp implements Service {
 
     @Autowired
@@ -29,7 +31,17 @@ public class ServiceImp implements Service {
     @Override
     @Transactional
     public void add(String name, String age, String password, Set<String> roleSet) {
-
+        if (name != null && age.matches("[0-9]+")
+                && password != null && !roleSet.isEmpty()) {
+            User user = new User();
+            Set<Role> roles = roleSet.stream().map(x -> dao.getRoleByName(x))
+                    .collect(Collectors.toSet());
+            user.setName(name);
+            user.setAge(Integer.parseInt(age));
+            user.setPassword(password);
+            user.setRoleSet(roles);
+            dao.addUser(user);
+        }
     }
 
     @Transactional

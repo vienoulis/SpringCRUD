@@ -7,47 +7,48 @@
 </head>
 <body>
 <h1>Users</h1>
-<form method="post" action="/admin">
+<form method="post" action="/admin/user">
     <table>
         <tr>
-            <td> Name:</td><td> <input type="text" name="name"></td>
+            <td> Name:</td>
+            <td><input type="text" name="name"></td>
 
         </tr>
         <tr>
-            <td> Age:</td><td> <input type="number" name="age"></td>
+            <td> Age:</td>
+            <td><input type="number" name="age"></td>
         </tr>
         <tr>
-            <td>Passport: </td><td><input type="number" name="passport"></td>
+            <td>Passport:</td>
+            <td><input type="number" name="password"></td>
         </tr>
         <tr>
-            <td> Password:</td><td> <input type="text" name="password"></td>
+            <td>Role:</td>
+            <td>
+                <input type="checkbox" name="role_admin" value="ROLE_ADMIN"/> Admin
+                <input type="checkbox" name="role_user" value="ROLE_USER"/> User
+            </td>
         </tr>
     </table>
-    <p>
-        Role: <input type="checkbox" name="role"> admin
-    </p>
     <p><input type="submit" name="add" value="Create"></p>
 </form>
-<%--<table>--%>
-<%--    <tr>--%>
-<%--        <td><h4>Name: </h4></td>--%>
-<%--        <td><h4>Age: </h4></td>--%>
-<%--        <td><h4>Passport: </h4></td>--%>
-<%--        <td><h4>Role: </h4></td>--%>
-<%--    </tr>--%>
-<%--    <c:forEach items="${test}" var='user'>--%>
-<%--        <form method="post">--%>
-<%--            <input type="hidden" value="${user.id}" name="userId">--%>
-<%--            <tr>--%>
-<%--                <td><c:out value="${user.name}"/></td>--%>
-<%--                <td><c:out value="${user.age}"/></td>--%>
-<%--                <td><c:out value="${user.passport}"/></td>--%>
-<%--                <td><c:out value="${user.role}"/></td>--%>
-<%--                <td><input formaction="/admin/delete" type="submit" name="delete" value="Delete"></td>--%>
-<%--                <td><input formaction="/admin/update" formmethod="get" type="submit" name="update" value="Update"></td>--%>
-<%--            </tr>--%>
-<%--        </form>--%>
-<%--    </c:forEach>--%>
-<%--</table>--%>
+<table>
+    <tr>
+        <td><h4>Name: </h4></td>
+        <td><h4>Age: </h4></td>
+    </tr>
+    <c:forEach items="${users}" var='user'>
+        <form method="post">
+            <input type="hidden" value="${user.id}" name="userId">
+            <tr>
+                <td><c:out value="${user.name}"/></td>
+                <td><c:out value="${user.age}"/></td>
+<%--                <td><c:out value="${user.rolesToString}"/></td>--%>
+                <td><input formaction="/admin/delete" type="submit" name="delete" value="Delete"></td>
+                <td><input formaction="/admin/update" formmethod="get" type="submit" name="update" value="Update"></td>
+            </tr>
+        </form>
+    </c:forEach>
+</table>
 </body>
 </html>

@@ -6,7 +6,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 public class AppImp extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[]{CrudConfig.class};
+        return new Class<?>[]{CrudConfig.class, SecurityConfig.class};
     }
 
     @Override

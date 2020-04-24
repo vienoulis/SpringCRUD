@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Users</h1>
-<form method="post" action="/user">
+<form method="post" action="/admin/user">
     <table>
         <tr>
             <td> Name:</td>
@@ -20,13 +20,13 @@
         </tr>
         <tr>
             <td>Passport:</td>
-            <td><input type="number" name="passport"></td>
+            <td><input type="number" name="password"></td>
         </tr>
         <tr>
             <td>Role:</td>
             <td>
-                <input type="checkbox" name="role_admin" value="ADMIN"/> Admin
-                <input type="checkbox" name="role_user" value="USER"/> User
+                <input type="checkbox" name="role_admin" value="ROLE_ADMIN"/> Admin
+                <input type="checkbox" name="role_user" value="ROLE_USER"/> User
             </td>
         </tr>
     </table>
@@ -43,9 +43,9 @@
             <tr>
                 <td><c:out value="${user.name}"/></td>
                 <td><c:out value="${user.age}"/></td>
-                <td><c:out value="${user.rolesToString}"/></td>
-                <td><input formaction="/delete" type="submit" name="delete" value="Delete"></td>
-                <td><input formaction="/update" formmethod="get" type="submit" name="update" value="Update"></td>
+<%--                <td><c:out value="${user.rolesToString}"/></td>--%>
+                <td><input formaction="/admin/delete" type="submit" name="delete" value="Delete"></td>
+                <td><input formaction="/admin/update" formmethod="get" type="submit" name="update" value="Update"></td>
             </tr>
         </form>
     </c:forEach>

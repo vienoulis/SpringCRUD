@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Update</h1>
-<form method="post" action="/update">
+<form method="post" action="/admin/update">
     <table>
         <tr>
             <input type="hidden" name="userId" value="${userUpdated.id}">
@@ -25,8 +25,8 @@
         <tr>
             <td>Role:</td>
             <td>
-                <input type="checkbox" name="role_admin_update" value="ADMIN"/> Admin
-                <input type="checkbox" name="role_user_update" value="USER"/> User
+                <input type="checkbox" name="role_admin_update" value="ROLE_ADMIN"/> Admin
+                <input type="checkbox" name="role_user_update" value="ROLE_USER"/> User
             </td>
         </tr>
     </table>

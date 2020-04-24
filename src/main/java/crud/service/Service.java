@@ -17,5 +17,5 @@ public interface Service {
 
     void delete(String userId);
 
-    User getUserByName(String nmae);
+    User getUserByName(String name);
 }

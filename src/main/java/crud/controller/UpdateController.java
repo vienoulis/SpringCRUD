@@ -18,7 +18,7 @@ public class UpdateController {
     @Autowired
     private Service service;
 
-    @GetMapping("/update")
+    @GetMapping("/admin/update")
     public String getUpdate(HttpServletRequest request, ModelMap map) {
         User user = service.getUserById(request.getParameter("userId"));
         map.addAttribute("userUpdated", user);
@@ -26,7 +26,7 @@ public class UpdateController {
         return "update";
     }
 
-    @PostMapping("/update")
+    @PostMapping("/admin/update")
     public String postUpdate(HttpServletRequest request, ModelMap map) {
         String name = request.getParameter("nameToUpdate");
         String age = request.getParameter("ageToUpdate");
@@ -38,6 +38,6 @@ public class UpdateController {
         service.update(id, name, age, password, roleSet);
         map.addAttribute("users", service.getUsers());
 
-        return "user";
+        return "admin";
     }
 }
