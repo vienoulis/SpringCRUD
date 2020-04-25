@@ -63,15 +63,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // защищенные URL
                 .antMatchers("/user").access("hasAnyRole('USER')")
                 .antMatchers("/admin/**").access("hasAnyRole('ADMIN')").anyRequest().authenticated();
-//                .antMatchers("/admin/**").access("hasAnyRole('ADMIN')")
-//                .and().formLogin().defaultSuccessUrl("/", false);
-//                .antMatchers("/hello").access("ROLE_ADMIN").anyRequest().authenticated();
 
     }
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return NoOpPasswordEncoder.getInstance();
-//    }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
