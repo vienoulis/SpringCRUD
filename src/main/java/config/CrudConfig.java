@@ -23,7 +23,6 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableWebMvc
 @EnableTransactionManagement
 @PropertySource("classpath:db.properties")
 @ComponentScan("crud")
