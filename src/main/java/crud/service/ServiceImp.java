@@ -3,7 +3,6 @@ package crud.service;
 import crud.dao.UserDao;
 import crud.model.Role;
 import crud.model.User;
-import javafx.print.Collation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,14 +10,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-public class ServiceImp implements Service {
+public class ServiceImp implements Service, UserDetailsService {
 
     @Autowired
     private UserDao dao;
@@ -50,31 +47,27 @@ public class ServiceImp implements Service {
     }
 
     @Transactional
-    public Role getRoleByName(String role){
+    public Role getRoleByName(String role) {
         return dao.getRoleByName(role);
     }
 
-
-
     @Transactional
     @Override
-    public void update(String id, String name, String age, String password, Set<String> roleSet) {
+    public void updateUser(String id, String name, String age, String password, Set<String> roleSet) {
         if (id.matches("[0-9]+") && name != null &&
                 age.matches("[0-9]+") && password != null &&
                 !roleSet.isEmpty()) {
-            Set<Role> roles = roleSet.stream()
-                    .map(this::getRoleByName)
-                    .collect(Collectors.toSet());
-            dao.update(Long.parseLong(id), name, Integer.parseInt(age), password, roles);
+//            dao.deleteUsersRole(id);
+//            for (String s: roleSet) {
+//                dao.addUserRole(Long.parseLong(id), getRolesId(s));
+//            }
+            dao.update(Long.parseLong(id), name, Integer.parseInt(age), password);
         }
     }
 
 //    @Transactional
-//    public void update(String id, String name, String age, String password) {
-//        if (id.matches("[0-9]+") && name != null &&
-//                age.matches("[0-9]+") && password != null) {
-//            dao.update(Long.parseLong(id), name, Integer.parseInt(age), Long.parseLong(passport));
-//        }
+//    public Long getRolesId(String s) {
+//        return dao.getRolesId(s);
 //    }
 
     @Transactional
@@ -88,5 +81,11 @@ public class ServiceImp implements Service {
     @Override
     public User getUserByName(String name) {
         return dao.getUserByName(name);
+    }
+
+    @Transactional
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return getUserByName(username);
     }
 }

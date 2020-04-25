@@ -1,7 +1,6 @@
 package crud.service;
 
 import crud.model.User;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 import java.util.Set;
@@ -13,7 +12,7 @@ public interface Service {
 
     User getUserById(String id);
 
-    void update(String id, String name, String age, String password, Set<String> roleSet);
+    void updateUser(String id, String name, String age, String password, Set<String> roleSet);
 
     void delete(String userId);
 

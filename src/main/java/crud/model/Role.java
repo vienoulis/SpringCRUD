@@ -18,14 +18,7 @@ public class Role implements GrantedAuthority {
     @Column(name = "role")
     private String role;
 
-//    @ManyToMany(mappedBy = "roleSet", fetch = FetchType.EAGER)
     @ManyToMany(mappedBy = "roleSet")
-//    @ManyToMany( fetch = FetchType.EAGER)
-//    @JoinTable(name = "users_roles",
-//            //foreign key for EmployeeEntity in employee_car table
-//            joinColumns = @JoinColumn(name =  "roleSet_id"),
-//            //foreign key for other side - EmployeeEntity in employee_car table
-//            inverseJoinColumns = @JoinColumn(name = "userSet_id"))
     private Set<User> userSet = new HashSet<>();
 
     public Role() {
@@ -35,7 +28,6 @@ public class Role implements GrantedAuthority {
     public Role(Long id, String role) {
         this.id = id;
         this.role = role;
-//        this.userSet = userSet;
     }
 
     public Long getId() {
@@ -84,6 +76,6 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return null;
+        return getRole();
     }
 }

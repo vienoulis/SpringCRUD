@@ -26,12 +26,9 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
-            //foreign key for EmployeeEntity in employee_car table
             joinColumns = @JoinColumn(name = "userSet_id"),
-            //foreign key for other side - EmployeeEntity in employee_car table
             inverseJoinColumns = @JoinColumn(name = "roleSet_id"))
     private Set<Role> roleSet = new HashSet<>();
 
@@ -84,17 +81,9 @@ public class User implements UserDetails {
         this.age = age;
     }
 
-    public String rolesToString() {
-        StringBuilder sb = new StringBuilder();
-        for (Role role : getRoleSet()) {
-            sb.append(role.toString());
-        }
-        return sb.toString();
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return getRoleSet();
     }
 
     public String getPassword() {
@@ -108,22 +97,22 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     public void setPassword(String password) {

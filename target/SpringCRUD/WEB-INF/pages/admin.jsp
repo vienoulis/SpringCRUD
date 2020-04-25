@@ -43,12 +43,11 @@
             <tr>
                 <td><c:out value="${user.name}"/></td>
                 <td><c:out value="${user.age}"/></td>
-<%--                <td><c:out value="${user.rolesToString}"/></td>--%>
                 <td><input formaction="/admin/delete" type="submit" name="delete" value="Delete"></td>
                 <td><input formaction="/admin/update" formmethod="get" type="submit" name="update" value="Update"></td>
             </tr>
         </form>
     </c:forEach>
 </table>
-</body>
+<a href="/logout" name="LogOut">Log out.</a></body>
 </html>

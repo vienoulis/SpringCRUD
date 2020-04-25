@@ -4,7 +4,6 @@ import crud.model.Role;
 import crud.model.User;
 
 import java.util.List;
-import java.util.Set;
 
 public interface UserDao {
     List<User> getAllUsers();
@@ -15,9 +14,15 @@ public interface UserDao {
 
     User getUserById(Long id);
 
-    void update(long userId, String name, int age, String password, Set<Role> roleSet);
+    void update(long userId, String name, int age, String password);
 
     Role getRoleByName(String s);
 
     User getUserByName(String s);
+
+    void deleteUsersRole(String id);
+
+    Long getRolesId(String s);
+
+    void addUserRole(long id, Long rolesId);
 }

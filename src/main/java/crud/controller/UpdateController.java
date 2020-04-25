@@ -35,7 +35,7 @@ public class UpdateController {
         Set<String> roleSet = new HashSet<>();
         roleSet.add(request.getParameter("role_admin_update"));
         roleSet.add(request.getParameter("role_user_update"));
-        service.update(id, name, age, password, roleSet);
+        service.updateUser(id, name, age, password, roleSet);
         map.addAttribute("users", service.getUsers());
 
         return "admin";

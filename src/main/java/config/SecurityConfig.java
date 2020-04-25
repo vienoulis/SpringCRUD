@@ -1,8 +1,6 @@
 package config;
 
 import crud.handler.LoginSuccessHandler;
-import crud.model.User;
-import crud.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,12 +9,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import java.lang.ref.PhantomReference;
 
 @Configuration
 @EnableTransactionManagement
@@ -25,12 +22,11 @@ import java.lang.ref.PhantomReference;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private Service service;
+    private UserDetailsService service;
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(s -> service.getUserByName(s)).passwordEncoder(passwordEncoder());
-        auth.inMemoryAuthentication().withUser("ADMIN").password("ADMIN").roles("ADMIN");
+        auth.userDetailsService(service).passwordEncoder(passwordEncoder());
 
     }
 
@@ -65,8 +61,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //страницы аутентификаци доступна всем
                 .antMatchers("/login").anonymous()
                 // защищенные URL
-                .antMatchers("/hello").access("hasAnyRole('ADMIN')").anyRequest().authenticated();
+                .antMatchers("/user").access("hasAnyRole('USER')")
+                .antMatchers("/admin/**").access("hasAnyRole('ADMIN')").anyRequest().authenticated();
+//                .antMatchers("/admin/**").access("hasAnyRole('ADMIN')")
+//                .and().formLogin().defaultSuccessUrl("/", false);
+//                .antMatchers("/hello").access("ROLE_ADMIN").anyRequest().authenticated();
+
     }
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return NoOpPasswordEncoder.getInstance();
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

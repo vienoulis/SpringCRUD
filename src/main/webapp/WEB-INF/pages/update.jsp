@@ -34,6 +34,5 @@
         <input type="submit" name="doUpdate" value="Update">
     </p>
 </form>
-
-</body>
+<a href="/logout" name="LogOut">Log out.</a></body>
 </html>

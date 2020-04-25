@@ -16,6 +16,5 @@
         <input type="submit"/>
     </p>
 </form>
-
-</body>
+<a href="/logout" name="LogOut">Log out.</a></body>
 </html>
