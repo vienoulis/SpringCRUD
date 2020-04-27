@@ -4,6 +4,7 @@ import crud.model.User;
 import crud.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,7 @@ public class AdminController {
 
 
     @GetMapping()
-    public String getUser(ModelMap map) {
+    public String getUser(Model map) {
         List<User> users = service.getUsers();
         map.addAttribute("users", users);
 
@@ -31,7 +32,7 @@ public class AdminController {
     }
 
     @PostMapping()
-    public String postUser(HttpServletRequest request, ModelMap map) {
+    public String postUser(HttpServletRequest request, Model map) {
         Set<String> roleSet = new HashSet<>();
         roleSet.add(request.getParameter("role_admin"));
         roleSet.add(request.getParameter("role_user"));

@@ -1,12 +1,10 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page isELIgnored="false" %>
-<html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Admin</title>
 </head>
 <body>
-<h1>Users</h1>
+<h1>Users thymeleaf</h1>
 <form method="post" action="/admin/user">
     <table>
         <tr>
@@ -37,17 +35,22 @@
         <td><h4>Name: </h4></td>
         <td><h4>Age: </h4></td>
     </tr>
-    <c:forEach items="${users}" var='user'>
+
+    <tr th:each="${users}">
         <form method="post">
             <input type="hidden" value="${user.id}" name="userId">
-            <tr>
-                <td><c:out value="${user.name}"/></td>
-                <td><c:out value="${user.age}"/></td>
-                <td><input formaction="/admin/delete" type="submit" name="delete" value="Delete"></td>
-                <td><input formaction="/admin/update" formmethod="get" type="submit" name="update" value="Update"></td>
-            </tr>
-        </form>
-    </c:forEach>
+
+            <td>
+                <th:out value="${user.name}"/>
+            </td>
+            <td>
+                <c:out value="${user.age}"/>
+            </td>
+            <td><input formaction="/admin/delete" type="submit" name="delete" value="Delete"></td>
+            <td><input formaction="/admin/update" formmethod="get" type="submit" name="update" value="Update"></td>
+    </tr>
+    </form>
+    </trth:>
 </table>
 <a href="/logout" name="LogOut">Log out.</a></body>
 </html>

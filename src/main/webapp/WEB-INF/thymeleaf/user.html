@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User thymeleaf</title>
+</head>
+<body>
+<P>
+    User name: <th:out value="${user.name}"/>
+</P>
+<p>
+    User age: <th:out  value="${user.age}"/>
+</p>
+<a href="/logout" name="LogOut">Log out.</a>
+</body>
+</html>
