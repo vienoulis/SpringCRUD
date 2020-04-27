@@ -19,7 +19,7 @@
             <td><input type="number" name="age"></td>
         </tr>
         <tr>
-            <td>Passport:</td>
+            <td>Password:</td>
             <td><input type="number" name="password"></td>
         </tr>
         <tr>

@@ -1,5 +1,6 @@
 package crud.controller;
 
+import crud.model.Role;
 import crud.model.User;
 import crud.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,23 +20,20 @@ public class UpdateController {
     private Service service;
 
     @GetMapping("/admin/update")
-    public String getUpdate(HttpServletRequest request, ModelMap map) {
-        User user = service.getUserById(request.getParameter("userId"));
+    public String getUpdate(Long userId, ModelMap map) {
+        User user = service.getUserById(userId);
         map.addAttribute("userUpdated", user);
 
         return "update";
     }
 
     @PostMapping("/admin/update")
-    public String postUpdate(HttpServletRequest request, ModelMap map) {
-        String name = request.getParameter("nameToUpdate");
-        String age = request.getParameter("ageToUpdate");
-        String password = request.getParameter("passwordToUpdate");
-        String id = request.getParameter("userId");
-        Set<String> roleSet = new HashSet<>();
-        roleSet.add(request.getParameter("role_admin_update"));
-        roleSet.add(request.getParameter("role_user_update"));
-        service.updateUser(id, name, age, password, roleSet);
+    public String postUpdate(Long userId, ModelMap map, User user, String role_user, String role_admin) {
+        Set<Role> roleSet = new HashSet<>();
+        roleSet.add(service.getRoleByName(role_admin));
+        roleSet.add(service.getRoleByName(role_user));
+        user.setRoleSet(roleSet);
+        service.updateUser(userId, user);
         map.addAttribute("users", service.getUsers());
 
         return "admin";

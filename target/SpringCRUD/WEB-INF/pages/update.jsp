@@ -12,21 +12,21 @@
         <tr>
             <input type="hidden" name="userId" value="${userUpdated.id}">
             <td>Name:</td>
-            <td><input type="text" value="${userUpdated.name}" name="nameToUpdate"></td>
+            <td><input type="text" value="${userUpdated.name}" name="name"></td>
         </tr>
         <tr>/
             <td>Age:</td>
-            <td><input type="number" value="${userUpdated.age}" name="ageToUpdate"></td>
+            <td><input type="number" value="${userUpdated.age}" name="age"></td>
         </tr>
         <tr>
             <td>Password:</td>
-            <td><input type="text" value="${userUpdated.password}" name="passwordToUpdate"></td>
+            <td><input type="text" value="${userUpdated.password}" name="password"></td>
         </tr>
         <tr>
             <td>Role:</td>
             <td>
-                <input type="checkbox" name="role_admin_update" value="ROLE_ADMIN"/> Admin
-                <input type="checkbox" name="role_user_update" value="ROLE_USER"/> User
+                <input type="checkbox" name="role_admin" value="ROLE_ADMIN"/> Admin
+                <input type="checkbox" name="role_user" value="ROLE_USER"/> User
             </td>
         </tr>
     </table>

@@ -2,7 +2,6 @@ package crud.dao;
 
 import crud.model.Role;
 import crud.model.User;
-import crud.model.UsersRole;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,6 +20,9 @@ public class UserDaoImp implements UserDao {
         return sessionFactory.getCurrentSession().createQuery("from User").getResultList();
     }
 
+    public void update(User user){
+        sessionFactory.getCurrentSession().update(user);
+    }
     @Override
     public void addUser(User user) {
         sessionFactory.getCurrentSession().save(user);
@@ -34,8 +36,10 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public User getUserById(Long id) {
-        return (User) sessionFactory.getCurrentSession().createQuery("from User where id = :id")
+        User user = (User) sessionFactory.getCurrentSession().createQuery("from User where id = :id")
                 .setParameter("id", id).uniqueResult();
+
+        return user;
     }
 
 
@@ -60,23 +64,5 @@ public class UserDaoImp implements UserDao {
                 .setParameter("a", age)
                 .setParameter("ps", password)
                 .executeUpdate();
-    }
-
-    @Override
-    public void deleteUsersRole(String id) {
-        sessionFactory.getCurrentSession().createQuery("delete from UsersRole where usersId = :id")
-                .setParameter("id", id).executeUpdate();
-    }
-
-    @Override
-    public Long getRolesId(String s) {
-        return (Long) sessionFactory.getCurrentSession()
-                .createQuery("select id from Role where role = :nm")
-                .uniqueResult();
-    }
-
-    @Override
-    public void addUserRole(long id, Long rolesId) {
-        sessionFactory.getCurrentSession().save(new UsersRole(id, rolesId));
     }
 }

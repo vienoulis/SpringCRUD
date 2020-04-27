@@ -65,12 +65,10 @@ public class Role implements GrantedAuthority {
         if (o == null || getClass() != o.getClass()) return false;
         Role role1 = (Role) o;
         return Objects.equals(role, role1.role);
-//                Objects.equals(userSet, role1.userSet);
     }
 
     @Override
     public int hashCode() {
-//        return Objects.hash(role, userSet);
         return Objects.hash(role);
     }
 

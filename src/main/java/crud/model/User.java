@@ -83,7 +83,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRoleSet();
+        return roleSet;
     }
 
     public String getPassword() {
